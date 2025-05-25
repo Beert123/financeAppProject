@@ -1,0 +1,25 @@
+### Opret en kategori
+POST http://localhost:8080/categories
+Content-Type: application/json
+
+{
+"name": "Food",
+"type": "expense"
+}
+
+### Hent alle kategorier
+GET http://localhost:8080/categories
+
+### Make a Transaction
+POST http://localhost:8080/trans
+{
+  "amount": 29.99,
+  "date": "2023-10-15",
+  "description": "Grocery shopping",
+  "category": "Food",
+  "type": "expense"
+}
+
+GET /transactions?startDate=2023-10-01&endDate=2023-10-31&category=Food
+
+GET /summary?timeRange=monthly

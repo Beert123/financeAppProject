@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+<h2>Add Transaction</h2>
+<form id="transaction-form">
+    <input name="amount" placeholder="Amount" required />
+    <input name="date" type="date" required />
+    <input name="description" placeholder="Description" required />
+    <input name="type" placeholder="Type" required />
+    <input name="categoryId" placeholder="Category ID" required />
+    <button type="submit">Add transaction</button>
+</form>
+<h2>Add Category</h2>
+<form id="category-form">
+    <input name="name" placeholder="name" required />
+    <input name="type" placeholder="Type" required />
+    <button type="submit">Add Category</button>
+</form>
+<h1>Transactions</h1>
+<ul id="transaction-list"></ul>
+
+<h1>Categories</h1>
+<ul id="category-list"></ul>
+
+<!-- JS link -->
+<script src="js/main.js"></script>
+</body>
+</html>

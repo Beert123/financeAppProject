@@ -1,25 +1,42 @@
-### Opret en kategori
-POST http://localhost:8080/categories
+### Make category
+POST http://localhost:8080/categoriesPost
 Content-Type: application/json
 
 {
-"name": "Food",
-"type": "expense"
+"name": "Food1",
+"type": "expense4"
 }
 
-### Hent alle kategorier
+### get all categories
 GET http://localhost:8080/categories
 
-### Make a Transaction
-POST http://localhost:8080/trans
+### Make a transaction
+POST http://localhost:8080/transactions
+Content-Type: application/json
+
 {
   "amount": 29.99,
   "date": "2023-10-15",
   "description": "Grocery shopping",
-  "category": "Food",
-  "type": "expense"
+  "type": "expense",
+  "categoryId": 1
 }
+### Get transactions
+GET http://localhost:8080/transactions
+### Delete trans
+DELETE http://localhost:8080/transactions/2
 
-GET /transactions?startDate=2023-10-01&endDate=2023-10-31&category=Food
-
+### Get summary
 GET /summary?timeRange=monthly
+
+### Update transacion
+PUT http://localhost:8080/transactions/1
+Content-Type: application/json
+
+{
+  "amount": 100,
+  "date": "2025-05-28",
+  "description": "Updated Nintendo Game",
+  "type": "expense",
+  "categoryId": 1
+}

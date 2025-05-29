@@ -1,5 +1,6 @@
 package com.example.financeappproject.Service;
 
+import com.example.financeappproject.DTO.SummaryDTO;
 import com.example.financeappproject.DTO.TransactionDTO;
 import com.example.financeappproject.DTO.TransactionResponseDTO;
 import com.example.financeappproject.Model.Category;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+
 public class TransactionServiceTest {
     private TransactionRepository transactionRepository;
     private CategoryRepository categoryRepository;
@@ -52,10 +53,11 @@ public class TransactionServiceTest {
         assertEquals("Test", result.getDescription());
         assertEquals("TestName", result.getCategoryName());
     }
+
     @Test
     @DisplayName("Returns all transactions that has been made")
-    void getAllTrans(){
-        Transaction transaction = new Transaction(1,200,LocalDate.of(2025,05,27),"Gameboy","Expense");
+    void getAllTrans() {
+        Transaction transaction = new Transaction(1, 200, LocalDate.of(2025, 05, 27), "Gameboy", "Expense");
         Category category = new Category();
         category.setName("Hobby");
         transaction.setCategory(category);
@@ -64,12 +66,14 @@ public class TransactionServiceTest {
 
         List<TransactionResponseDTO> result = transactionService.getAll();
 
-        assertEquals(1,result.size());
+        assertEquals(1, result.size());
         assertEquals("Hobby", result.get(0).getCategoryName());
     }
+
     @Test
-    void getTransId(){
-        Transaction transaction = new Transaction(1,200,LocalDate.of(2025,05,27),"Gameboy","Expense");
+    @DisplayName("Get trans based on id")
+    void getTransId() {
+        Transaction transaction = new Transaction(1, 200, LocalDate.of(2025, 05, 27), "Gameboy", "Expense");
         Category category = new Category();
         category.setName("Hobby");
         transaction.setCategory(category);
@@ -78,10 +82,12 @@ public class TransactionServiceTest {
 
         Optional<TransactionResponseDTO> result = transactionService.getById(1);
 
-        assertEquals(200,result.get().getAmount());
+        assertEquals(200, result.get().getAmount());
     }
+
     @Test
-    void updateTrans(){
+    @DisplayName("Update a transaction")
+    void updateTrans() {
         TransactionDTO updatedDto = new TransactionDTO();
         updatedDto.setAmount(55);
         updatedDto.setDate("2025-05-27");
@@ -89,7 +95,6 @@ public class TransactionServiceTest {
         updatedDto.setType("Expense");
         updatedDto.setCategoryId(1L);
 
-        // "Gammel" Transaction i databasen
         Transaction existing = new Transaction();
         existing.setId(1);
         existing.setAmount(200);
@@ -113,9 +118,10 @@ public class TransactionServiceTest {
         assertEquals(55, result.get().getAmount());
         assertEquals("Nintendo", result.get().getDescription());
     }
+
     @Test
     @DisplayName("Delete an existing transaction on id")
-    void deleteTrans(){
+    void deleteTrans() {
         Transaction transaction = new Transaction();
         transaction.setId(1);
 
@@ -124,6 +130,14 @@ public class TransactionServiceTest {
         transactionService.delete(1);
 
         verify(transactionRepository).findById(1);
+    }
+
+    @Test
+    @DisplayName("Show summary with balance")
+    void summary() {
+        SummaryDTO summary = new SummaryDTO(100, 50);
+        double result = summary.getBalance();
+        assertEquals(50, result);
     }
 }
 

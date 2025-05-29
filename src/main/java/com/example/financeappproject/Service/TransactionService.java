@@ -1,5 +1,6 @@
 package com.example.financeappproject.Service;
 
+import com.example.financeappproject.DTO.SummaryDTO;
 import com.example.financeappproject.DTO.TransactionDTO;
 import com.example.financeappproject.DTO.TransactionResponseDTO;
 import com.example.financeappproject.Mapper.TransactionMapper;
@@ -60,4 +61,21 @@ public class TransactionService {
                 .orElseThrow(() -> new RuntimeException("Not found"));
         repository.delete(transaction);
     }
+
+    public SummaryDTO getSummary() {
+        List<Transaction> allTrans = repository.findAll();
+        double earning = Optional.ofNullable(repository.sumAmountByType("income")).orElse(0.0);
+        double expense = Optional.ofNullable(repository.sumAmountByType("expense")).orElse(0.0);
+        for (Transaction transaction : allTrans) {
+            String type = transaction.getType().toLowerCase();
+
+            if (type.equals("earning")) {
+                earning += transaction.getAmount();
+            } else if (type.equals("expense")) {
+                expense += transaction.getAmount();
+            }
+        }
+        return new SummaryDTO(earning, expense);
+    }
+
 }

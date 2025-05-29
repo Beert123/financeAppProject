@@ -28,14 +28,14 @@ form input, form button {
 }
 
 form button {
-    background-color: #4caf50;
+    background-color: deepskyblue;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 form button:hover {
-    background-color: #45a049;
+    background-color: deepskyblue;
 }
 
 .transaction-list li {

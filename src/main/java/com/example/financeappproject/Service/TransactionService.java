@@ -47,7 +47,7 @@ public class TransactionService {
 
     public Optional<TransactionResponseDTO> update(int id, TransactionDTO updated) {
         return repository.findById(id).map(transaction -> {
-            Category category = categoryRepository.findById((long) updated.getCategoryId())
+            Category category = categoryRepository.findById(updated.getCategoryId())
                     .orElseThrow(() -> new RuntimeException("Category not found"));
 
             TransactionMapper.updateEntityFromDTO(transaction, updated, category);

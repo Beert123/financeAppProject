@@ -17,7 +17,7 @@ Content-Type: application/json
 {
   "amount": 4,
   "date": "2025-10-15",
-  "description": "test",
+  "description": "test2",
   "type": "earning",
   "categoryId": 1
 }
@@ -32,11 +32,12 @@ DELETE http://localhost:8080/trans/2
 GET http://localhost:8080/summary
 
 ### GET transID
-GET http://localhost:8080/trans/2
+GET http://localhost:8080/trans/1
 
 ### Update transacion
 PUT http://localhost:8080/trans/1
 Content-Type: application/json
+
 {
   "amount": 100,
   "date": "2025-05-28",

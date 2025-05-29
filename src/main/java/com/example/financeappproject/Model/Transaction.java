@@ -17,6 +17,18 @@ public class Transaction {
     @ManyToOne
     private Category category;
 
+    public Transaction(int id, double amount, LocalDate date, String description, String type) {
+        this.id = id;
+        this.amount = amount;
+        this.date = date;
+        this.description = description;
+        this.type = type;
+
+    }
+
+    public Transaction() {
+    }
+
     public int getId() {
         return id;
     }
@@ -63,5 +75,9 @@ public class Transaction {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public int getCategoryId() {
+        return this.category.getId();
     }
 }

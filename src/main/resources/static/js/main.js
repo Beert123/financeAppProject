@@ -1,5 +1,5 @@
-const list = document.getElementById('transaction-list');
-const form= document.getElementById('transaction-form');
+const listTransaction = document.getElementById('transaction-list');
+const formTransaction= document.getElementById('transaction-form');
 const formCategory  = document.getElementById('category-form');
 const listCategory = document.getElementById("category-list")
 
@@ -7,11 +7,21 @@ function loadTransactions() {
     fetch('/trans')
         .then(res => res.json())
         .then(data => {
-            list.innerHTML = '';
+            listTransaction.innerHTML = '';
             data.forEach(t => {
                 const item = document.createElement('li');
                 item.textContent = `${t.date} - ${t.amount} DKK - ${t.description}`;
-                list.appendChild(item);
+                item.onclick = () =>{
+                    if (confirm(`Delete transaction '${t.name}'?`)) {
+                        fetch(`/trans/${t.id}`, {
+                            method: 'DELETE'
+                        }).then(() => {
+                            loadCategories();
+                            loadTransactions();
+                        });
+                    }
+                }
+                listTransaction.appendChild(item);
             });
         });
 }
@@ -23,23 +33,33 @@ function loadCategories(){
             data.forEach(t => {
                 const item = document.createElement('li');
                 item.textContent = `${t.name} - ${t.type}`;
+                item.onclick = () =>{
+                    if (confirm(`Delete category '${t.name}'?`)) {
+                        fetch(`/categories/${t.id}`, {
+                            method: 'DELETE'
+                        }).then(() => {
+                            loadCategories();
+                            loadTransactions();
+                        });
+                    }
+                }
                 listCategory.appendChild(item);
             });
         });
 }
 
-form.addEventListener('submit', e => {
+formTransaction.addEventListener('submit', e => {
     e.preventDefault();
-    const formData = new FormData(form);
+    const formData = new FormData(formTransaction);
     const jsonData = Object.fromEntries(formData);
     jsonData.amount = parseFloat(jsonData.amount);
 
-    fetch('/transPost', {
+    fetch('/trans', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(jsonData)
     }).then(() => {
-        form.reset();
+        formTransaction.reset();
         loadTransactions();
     });
 });

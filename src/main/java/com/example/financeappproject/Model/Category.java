@@ -1,8 +1,10 @@
 package com.example.financeappproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
+
 @Entity
 public class Category {
     @Id
@@ -10,8 +12,10 @@ public class Category {
     private int id;
     private String name;
     private String type;
-    @OneToMany(mappedBy =  "category")
+    @JsonIgnore
+    @OneToMany(mappedBy = "category")
     private List<Transaction> transactionList;
+
 
     public int getId() {
         return id;

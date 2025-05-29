@@ -19,11 +19,13 @@ class CategoryServiceTest {
     private CategoryService categoryService;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         categoryRepository = mock(CategoryRepository.class);
         categoryService = new CategoryService(categoryRepository);
     }
+
     @Test
+    @DisplayName("save a category")
     void save() {
         Category category = new Category();
         category.setName("PS4");
@@ -34,8 +36,8 @@ class CategoryServiceTest {
 
         Category result = categoryService.save(category);
 
-        assertEquals("Gaming",result.getType());
-        assertEquals(1,categoryService.getAll().size());
+        assertEquals("Gaming", result.getType());
+        assertEquals(1, categoryService.getAll().size());
     }
 
     @Test
@@ -49,11 +51,12 @@ class CategoryServiceTest {
 
         List<Category> result = categoryService.getAll();
 
-        assertEquals(1,result.size());
-        assertEquals("PSP",result.get(0).getName());
+        assertEquals(1, result.size());
+        assertEquals("PSP", result.get(0).getName());
     }
 
     @Test
+    @DisplayName("get category by id")
     void getById() {
         Category category = new Category();
         category.setName("Guitar");
@@ -63,6 +66,6 @@ class CategoryServiceTest {
 
         Optional<Category> result = categoryService.getById((long) 1);
 
-        assertEquals("Guitar",result.get().getName());
+        assertEquals("Guitar", result.get().getName());
     }
 }

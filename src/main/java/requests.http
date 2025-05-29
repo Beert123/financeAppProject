@@ -3,36 +3,40 @@ POST http://localhost:8080/categoriesPost
 Content-Type: application/json
 
 {
-"name": "Food1",
-"type": "expense4"
+  "name": "Food1",
+  "type": "expense4"
 }
 
 ### get all categories
 GET http://localhost:8080/categories
 
 ### Make a transaction
-POST http://localhost:8080/transactions
+POST http://localhost:8080/trans
 Content-Type: application/json
 
 {
-  "amount": 29.99,
-  "date": "2023-10-15",
-  "description": "Grocery shopping",
-  "type": "expense",
+  "amount": 4,
+  "date": "2025-10-15",
+  "description": "test",
+  "type": "earning",
   "categoryId": 1
 }
+
 ### Get transactions
-GET http://localhost:8080/transactions
+GET http://localhost:8080/trans
+
 ### Delete trans
-DELETE http://localhost:8080/transactions/2
+DELETE http://localhost:8080/trans/2
 
 ### Get summary
-GET /summary?timeRange=monthly
+GET http://localhost:8080/summary
+
+### GET transID
+GET http://localhost:8080/trans/2
 
 ### Update transacion
-PUT http://localhost:8080/transactions/1
+PUT http://localhost:8080/trans/1
 Content-Type: application/json
-
 {
   "amount": 100,
   "date": "2025-05-28",

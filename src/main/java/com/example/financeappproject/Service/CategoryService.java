@@ -14,13 +14,16 @@ public class CategoryService {
     public CategoryService(CategoryRepository repository) {
         this.repository = repository;
     }
-    public Category save(Category category){
+
+    public Category save(Category category) {
         return repository.save(category);
     }
-    public List<Category> getAll(){
+
+    public List<Category> getAll() {
         return repository.findAll();
     }
-    public Optional<Category> getById(Long id){
+
+    public Optional<Category> getById(Long id) {
         return repository.findById(id);
     }
 }

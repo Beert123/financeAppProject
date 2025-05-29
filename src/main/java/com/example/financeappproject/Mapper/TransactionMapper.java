@@ -17,6 +17,7 @@ public class TransactionMapper {
         t.setCategory(category);
         return t;
     }
+
     public static TransactionResponseDTO toResponseDTO(Transaction t) {
         TransactionResponseDTO dto = new TransactionResponseDTO();
         dto.setId(t.getId());
@@ -27,6 +28,7 @@ public class TransactionMapper {
         dto.setCategoryName(t.getCategory().getName());
         return dto;
     }
+
     public static void updateEntityFromDTO(Transaction existing, TransactionDTO dto, Category category) {
         existing.setAmount(dto.getAmount());
         existing.setDate(LocalDate.parse(dto.getDate()));

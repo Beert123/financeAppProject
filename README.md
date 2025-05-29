@@ -35,6 +35,7 @@ Categories are predefined in the system - Must be made first
   - **JDBC URL**: `jdbc:h2:mem:testdb`  
   - **Username**: `sa`  
   - **Password**: *(leave empty)*
+- requests.http: Used to "test" endpoints
 
 
 

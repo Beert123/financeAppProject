@@ -3,6 +3,7 @@
 ## Description
 A Spring Boot backend API for tracking personal finances such as expenses and earnings.  
 It supports creating, viewing, updating, and deleting financial transactions, each associated with a category.
+It can also view a summary which provides some additional information about the transactions
 
 ## Features
 - Add, view, update, and delete transactions
